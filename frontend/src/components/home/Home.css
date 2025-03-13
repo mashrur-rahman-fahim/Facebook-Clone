@@ -1,0 +1,253 @@
+.landing-container {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+  }
+  
+  .header {
+    background-color: #ffffff;
+    padding: 15px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .logo {
+    font-size: 40px;
+    color: #1877f2;
+    font-weight: bold;
+  }
+  
+  .login-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .login-form input {
+    padding: 10px;
+    border: 1px solid #dddfe2;
+    border-radius: 5px;
+    width: 200px;
+    flex-grow: 1;
+  }
+  
+  .login-button {
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    height: 40px;
+  }
+  
+  .form-help {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .form-help a {
+    color: #1877f2;
+    text-decoration: none;
+  }
+  
+  .separator {
+    height: 20px;
+    border-left: 1px solid #dddfe2;
+  }
+  
+  .create-new-account {
+    background-color: #42b72a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .main-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+    gap: 50px;
+    flex-wrap: wrap;
+  }
+  
+  .left-section {
+    max-width: 500px;
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .left-section h1 {
+    font-size: 28px;
+    color: #1c1e21;
+    margin-bottom: 20px;
+  }
+  
+  .feature {
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  
+  .right-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 400px;
+    flex: 1;
+    max-width: 100%;
+  }
+  
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .name-inputs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .name-inputs input {
+    flex: 1;
+    min-width: 150px;
+  }
+  
+  .signup-form input, .signup-form select {
+    padding: 10px;
+    border: 1px solid #dddfe2;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  .signup-button {
+    background-color: #42b72a;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .footer {
+    border-top: 1px solid #dddfe2;
+    padding: 20px;
+    text-align: center;
+    color: #737373;
+    font-size: 14px;
+  }
+  
+  .links {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  /* Responsive Media Queries */
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .form-row {
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .login-form input {
+      width: 100%;
+    }
+    
+    .main-content {
+      flex-direction: column;
+      align-items: center;
+      margin: 20px auto;
+      gap: 30px;
+    }
+    
+    .left-section {
+      text-align: center;
+    }
+    
+    .right-section {
+      width: 100%;
+      max-width: 500px;
+    }
+    
+    .name-inputs {
+      flex-direction: column;
+    }
+    
+    .login-button {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logo {
+      font-size: 32px;
+    }
+    
+    .left-section h1 {
+      font-size: 24px;
+    }
+    
+    .feature {
+      font-size: 14px;
+    }
+    
+    .right-section {
+      padding: 15px;
+    }
+    
+    .signup-button {
+      font-size: 16px;
+    }
+    
+    .footer {
+      padding: 15px;
+    }
+    
+    .links {
+      gap: 10px;
+    }
+    
+    .form-help {
+      flex-direction: column;
+    }
+    
+    .separator {
+      display: none;
+    }
+  }
