@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './Home.css';
 import api from '../../api/axios';
+import {useNavigate} from 'react-router-dom'
+
 
 export const Home = () => {
+  const navigate=useNavigate();
   const [signupData,setSignupData]= useState({
     firstName:"",
     lastName:"",
@@ -11,18 +14,50 @@ export const Home = () => {
     dateOfBirth:"",
     gender:""
   });
+ const [loginData,setLoginData]=useState({
+  email:"",
+  password:""
+ })
   const handleInputChange=(e)=>{
     setSignupData({...signupData,[e.target.name]:e.target.value});
+  }
+  const handleLogin=async(e)=>{
+    e.preventDefault();
+    try {
+      const res=await api.post('/auth/login',loginData,{
+        withCredentials: true,
+      })
+      
+      alert(res.data.message);
+      const accessToken=res.data.accessToken;
+      localStorage.setItem('accessToken',accessToken);
+      navigate('/dashboard');
+     
+      
+    } catch (error) {
+      
+      alert(error.response.data.message);
+    }
+
+  }
+  const handleLoginChange=(e)=>{
+    setLoginData({...loginData,[e.target.name]:e.target.value});
   }
 
   const handleSubmit=async(e)=>{
   
     e.preventDefault();
     try {
-      const res= await api.post('/auth/register',signupData);
+      const res= await api.post('/auth/register',signupData,{
+        withCredentials: true,
+      });
       console.log(res);
     
         alert(res.data.message);
+        const accessToken=res.data.accessToken;
+        localStorage.setItem('accessToken',accessToken);
+        navigate('/dashboard');
+       
      
     } catch (error) {
       alert(error.response.data.message);
@@ -36,9 +71,9 @@ export const Home = () => {
         <div className="login-form">
           <form>
             <div className="form-row">
-              <input type="text" placeholder="Email or phone number" />
-              <input type="password" placeholder="Password" />
-              <button className="login-button">Log In</button>
+              <input name="email" value={loginData.email} onChange={handleLoginChange} type="text" placeholder="Email" />
+              <input name="password" value={loginData.password} onChange={handleLoginChange} type="password" placeholder="Password" />
+              <button className="login-button" onClick={handleLogin}>Log In</button>
             </div>
             <div className="form-help">
               <a href="/">Forgot password?</a>
