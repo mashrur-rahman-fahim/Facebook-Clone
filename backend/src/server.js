@@ -5,7 +5,7 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import cookieParser from "cookie-parser";
 import apiRoutes from "./routes/apiRoutes.js";
-
+import path from 'path';
 dotenv.config();
 
 const app=express();
@@ -22,6 +22,10 @@ app.use(cors(
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.static(path.join(process.cwd(), 'client/build')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(process.cwd(), 'client/build', 'index.html'));
+  });
 connectDB();
 
 
