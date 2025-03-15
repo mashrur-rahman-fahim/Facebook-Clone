@@ -20,7 +20,7 @@ export const loginUser = async (req, res) => {
   }
   const token = generateToken(user);
   res.cookie("refreshToken", token.refreshToken, {
-    httpOnly: true,
+    httpOnly: false,
     secure: true,
     sameSite: "None",
   });
