@@ -22,10 +22,13 @@ app.use(cors(
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.static(path.join(process.cwd(), 'client/build')));
-app.get('*', (req, res) => {
-    res.sendFile(path.join(process.cwd(), 'client/build', 'index.html'));
-  });
+const __dirname =path.resolve();
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.join(__dirname,'dist')))
+    app.get('*',(req,res)=>{
+        res.sendFile(path.resolve(__dirname,'dist','index.html'));
+    })
+}
 connectDB();
 
 
