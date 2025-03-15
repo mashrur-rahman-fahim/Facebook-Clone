@@ -27,7 +27,7 @@ connectDB();
 
 app.use("/auth", authRoutes);
 app.use("/api", apiRoutes);
-app.use(express());
+
 app.get('/',(req,res)=>{
     return res.send("hello");
 })
