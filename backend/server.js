@@ -13,13 +13,12 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 
-const corsOptions = {
-    origin: "https://faceloop.vercel.app", // Allow requests from this origin
-    credentials: true, // Allow cookies and credentials
-    allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
-  };
+
   
-  app.use(cors(corsOptions));
+  app.use(cors({
+    origin: process.env.FRONTEND_URL,  // specify the frontend URL here
+    credentials:true
+  }));
 
 app.use(express.json());
 app.use(cookieParser());
