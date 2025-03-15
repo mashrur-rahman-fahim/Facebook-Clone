@@ -14,7 +14,7 @@ const port = process.env.PORT || 5000;
 
 
 const corsOptions = {
-    origin: "*", // Allow requests from this origin
+    origin: "https://faceloop.vercel.app", // Allow requests from this origin
     credentials: true, // Allow cookies and credentials
     allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
   };
