@@ -12,21 +12,24 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 
-
 const clientURLs = process.env.FRONTEND_URL.split(",");
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credential:true,
+}))
 
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (clientURLs.indexOf(origin) !== -1 || !origin) {
-      callback(null, true); // Allow the request
-    } else {
-      callback(new Error("Not allowed by CORS")); // Block the request
-    }
-  },
-  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-};
+// const corsOptions = {
+//   origin: (origin, callback) => {
+//     if (clientURLs.indexOf(origin) !== -1 || !origin) {
+//       callback(null, true); // Allow the request
+//     } else {
+//       callback(new Error("Not allowed by CORS")); // Block the request
+//     }
+//   },
+//   credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(cookieParser());
