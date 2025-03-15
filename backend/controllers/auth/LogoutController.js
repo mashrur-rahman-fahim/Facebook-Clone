@@ -2,7 +2,7 @@ export const logout=(req,res)=>{
     
     res.cookie('refreshToken'," ",{
         httpOnly:false,
-        secure:true,
+        secure:false,
         sameSite:'None'
        
     });
