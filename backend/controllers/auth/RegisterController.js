@@ -24,9 +24,10 @@ export const registerUser=async(req,res)=>{
         const token=generateToken(newUser);
       
         res.cookie('refreshToken',token.refreshToken,{
-            httpOnly:true,
-            secure:true,
-            sameSite:"None"
+            httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        path: "/",
         })
       
        return res.status(200).json({message:"User registered successfully",user:newUser,accessToken:token.accessToken});

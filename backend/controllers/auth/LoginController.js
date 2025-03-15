@@ -20,9 +20,10 @@ export const loginUser = async (req, res) => {
   }
   const token = generateToken(user);
   res.cookie("refreshToken", token.refreshToken, {
-    httpOnly: false,
-    secure: false,
-    sameSite: "None",
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    path: "/",
   });
   return res.status(200).json({ message: "User logged in",accessToken:token.accessToken });
 };
