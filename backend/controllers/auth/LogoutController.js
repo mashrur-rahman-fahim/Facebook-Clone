@@ -1,8 +1,8 @@
 export const logout=(req,res)=>{
     
     res.cookie('refreshToken'," ",{
-        httpOnly:false,
-        secure:false,
+        httpOnly:true,
+        secure:true,
         sameSite:'None'
        
     });
