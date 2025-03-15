@@ -22,7 +22,7 @@ export const loginUser = async (req, res) => {
   res.cookie("refreshToken", token.refreshToken, {
     httpOnly: true,
     secure: true,
-    sameSite: "none",
+    sameSite: "None",
   });
   return res.status(200).json({ message: "User logged in",accessToken:token.accessToken });
 };
