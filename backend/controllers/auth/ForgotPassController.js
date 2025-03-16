@@ -47,9 +47,7 @@ export const forgotPassowrd = async (req, res) => {
         
         <div style="margin: 25px 0; padding: 15px; background: #f0f2f5; border-radius: 6px;">
             <p style="margin: 0 0 15px 0; font-weight: 600;">Finish password change</p>
-            <a href="${
-              process.env.FRONTEND_URL
-            }/reset-password/${email}/${uniqueCode}" 
+            <a href="${process.env.FRONTEND_URL}/reset-password/${email}/${uniqueCode}" 
                style="display: inline-block; background: #1877f2; color: white; padding: 12px 24px; 
                       text-decoration: none; border-radius: 6px; font-weight: 600; margin-bottom: 15px;">
                 Reset Password
