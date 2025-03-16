@@ -28,7 +28,7 @@ export const forgotPassowrd = async (req, res) => {
     },
   });
   const mailOptions = {
-    from:  `"Facebook" <security@facebookmail.com>`, // Replace with your website name
+    from: "Facebook <security@facebookmail.com>", // Replace with your website name
     to: email, // User's email
     subject: "One more step to change your password",
     html: `
