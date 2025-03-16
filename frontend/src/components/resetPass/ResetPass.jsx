@@ -18,6 +18,7 @@ export const ResetPass = () => {
       await api.post(`/auth/verify-code`, { email, code });
     } catch (error) {
       setError("Invalid or expired verification code");
+    //   console.log(error);
       navigate("/");
     }
   }, [email, code, navigate]);
