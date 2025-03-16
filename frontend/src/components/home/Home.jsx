@@ -76,7 +76,7 @@ export const Home = () => {
               <button className="login-button" onClick={handleLogin}>Log In</button>
             </div>
             <div className="form-help">
-              <a href="/">Forgot password?</a>
+              <a href="/login/identity">Forgot password?</a>
               <div className="separator"></div>
             </div>
           </form>

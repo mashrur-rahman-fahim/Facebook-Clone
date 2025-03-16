@@ -1,0 +1,222 @@
+.recover-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+    padding: 20px;
+  }
+  
+  .recover-card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+  }
+  
+  .facebook-logo-container {
+    margin-bottom: 1.5rem;
+  }
+  
+  .facebook-logo {
+    width: 60px;
+    height: 60px;
+    color: #1877f2;
+  }
+  
+  .recover-title {
+    font-size: 1.5rem;
+    color: #1c1e21;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  .recover-subtitle {
+    color: #606770;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+  }
+  
+  .email-display {
+    background: #f0f2f5;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .email-display span {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  
+  .text-link {
+    color: #1877f2;
+    background: none;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .text-link:hover {
+    text-decoration: underline;
+  }
+  
+  .code-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dddfe2;
+    border-radius: 6px;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .code-input:focus {
+    outline: none;
+    border-color: #1877f2;
+    box-shadow: 0 0 0 2px #e7f3ff;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .primary-button {
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    flex: 1;
+    transition: background-color 0.2s;
+  }
+  
+  .primary-button:hover {
+    background-color: #166fe5;
+  }
+  
+  .primary-button:disabled {
+    background-color: #e4e6eb;
+    cursor: not-allowed;
+  }
+  
+  .secondary-button {
+    background-color: #e4e6eb;
+    color: #4b4f56;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    flex: 1;
+    transition: background-color 0.2s;
+  }
+  
+  .secondary-button:hover {
+    background-color: #d8dade;
+  }
+  
+  .resend-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #dddfe2;
+    color: #606770;
+  }
+  
+  .resend-section p {
+    margin-bottom: 0.5rem;
+  }
+  
+
+  /* Previous styles remain the same */
+
+.resend-button-container {
+    margin-top: 0.5rem;
+  }
+  
+  .success-message {
+    color: #42b72a;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+  }
+  
+  .spinner.small {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+    margin-left: 8px;
+    display: inline-block;
+  }
+  
+  .text-link[disabled] {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  .text-link[disabled]:hover {
+    text-decoration: none;
+  }
+  
+  /* Add to existing spinner styles */
+  .spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #1877f2;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 480px) {
+    .recover-card {
+      padding: 1.5rem;
+    }
+  
+    .button-group {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  
+    .primary-button,
+    .secondary-button {
+      width: 100%;
+    }
+  
+    .recover-title {
+      font-size: 1.25rem;
+    }
+  
+    .recover-subtitle {
+      font-size: 0.875rem;
+    }
+    
+    .code-input {
+      font-size: 1.25rem;
+    }
+  }

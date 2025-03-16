@@ -2,7 +2,7 @@ import User from "../../models/User.js";
 import bcrypt from 'bcrypt';
 import { generateToken } from "./TokenController.js";
 
-const hashPassword=async(password)=>{
+export const hashPassword=async(password)=>{
     const saltRounds = 10; // Controls the complexity of the hash
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     return hashedPassword;

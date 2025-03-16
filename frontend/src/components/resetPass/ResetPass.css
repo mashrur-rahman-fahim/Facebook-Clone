@@ -1,0 +1,193 @@
+.reset-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+    padding: 20px;
+  }
+  
+  .reset-card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+  }
+  
+  .facebook-logo-container {
+    margin-bottom: 1.5rem;
+  }
+  
+  .facebook-logo {
+    width: 60px;
+    height: 60px;
+    color: #1877f2;
+  }
+  
+  .reset-title {
+    font-size: 1.5rem;
+    color: #1c1e21;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  
+  .reset-subtitle {
+    color: #606770;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+  }
+  
+  .password-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dddfe2;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #1c1e21;
+    margin-bottom: 1rem;
+    transition: border-color 0.2s;
+  }
+  
+  .password-input:focus {
+    outline: none;
+    border-color: #1877f2;
+    box-shadow: 0 0 0 2px #e7f3ff;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .primary-button {
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    flex: 1;
+    transition: background-color 0.2s;
+  }
+  
+  .primary-button:hover {
+    background-color: #166fe5;
+  }
+  
+  .primary-button:disabled {
+    background-color: #e4e6eb;
+    cursor: not-allowed;
+  }
+  
+  .secondary-button {
+    background-color: #e4e6eb;
+    color: #4b4f56;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    flex: 1;
+    transition: background-color 0.2s;
+  }
+  
+  .secondary-button:hover {
+    background-color: #d8dade;
+  }
+  
+  .password-rules {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #dddfe2;
+    text-align: left;
+  }
+  
+  .rules-title {
+    color: #606770;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .rules-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  
+  .rules-list li {
+    color: #606770;
+    font-size: 0.875rem;
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .rules-list li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+  }
+  
+  .rules-list li.valid {
+    color: #42b72a;
+  }
+  
+  .error-message {
+    color: #f02849;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    text-align: left;
+  }
+  
+  .success-message {
+    color: #42b72a;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+  }
+  
+  .spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #1877f2;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  @media (max-width: 480px) {
+    .reset-card {
+      padding: 1.5rem;
+    }
+  
+    .button-group {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  
+    .primary-button,
+    .secondary-button {
+      width: 100%;
+    }
+  
+    .reset-title {
+      font-size: 1.25rem;
+    }
+  
+    .reset-subtitle {
+      font-size: 0.875rem;
+    }
+  }

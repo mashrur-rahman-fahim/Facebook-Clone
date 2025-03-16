@@ -14,7 +14,7 @@ const port = process.env.PORT || 5000;
 
 // const clientURLs = process.env.FRONTEND_URL.split(",");
 const corsOptions = {
-  origin:process.env.FRONTEND_URL,
+  origin: process.env.FRONTEND_URL,
   credentials: true,
 };
 app.use(cors(corsOptions));
@@ -41,7 +41,7 @@ connectDB();
 app.use("/auth", authRoutes);
 app.use("/api", apiRoutes);
 
-app.get("/", (req, res) => {
+app.get("/hello", (req, res) => {
   return res.send("hello");
 });
 app.listen(port, () => {

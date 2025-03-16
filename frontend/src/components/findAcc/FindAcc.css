@@ -1,0 +1,153 @@
+:root {
+    --fb-blue: #1877f2;
+    --fb-dark-blue: #166fe5;
+    --fb-gray: #f0f2f5;
+    --fb-dark-gray: #606770;
+    --fb-light-gray: #dddfe2;
+  }
+  
+  .find-acc-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--fb-gray);
+    font-family: Arial, sans-serif;
+  }
+  
+  .find-acc-card {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 16px;
+  }
+  
+  .facebook-logo-container {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  .facebook-logo {
+    width: 56px;
+    height: 56px;
+    color: var(--fb-blue);
+  }
+  
+  .find-acc-title {
+    text-align: center;
+    font-size: 24px;
+    color: #1c1e21;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  
+  .find-acc-subtitle {
+    text-align: center;
+    color: var(--fb-dark-gray);
+    font-size: 14px;
+    margin-bottom: 24px;
+    line-height: 1.4;
+  }
+  
+  .find-acc-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .email-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--fb-light-gray);
+    border-radius: 6px;
+    font-size: 16px;
+  }
+  
+  .email-input:focus {
+    outline: none;
+    border-color: var(--fb-blue);
+    box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
+  }
+  
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .search-button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--fb-blue);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .search-button:hover {
+    background-color: var(--fb-dark-blue);
+  }
+  
+  .search-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  .cancel-button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--fb-light-gray);
+    color: var(--fb-dark-gray);
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .cancel-button:hover {
+    background-color: #e4e6eb;
+  }
+  
+  .error-message {
+    color: #e41e3f;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  
+  .footer {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--fb-light-gray);
+    text-align: center;
+  }
+  
+  .copyright {
+    color: var(--fb-dark-gray);
+    font-size: 12px;
+    margin: 0;
+  }
+  
+  @media (max-width: 480px) {
+    .find-acc-card {
+      margin: 0 12px;
+      padding: 20px;
+    }
+    
+    .find-acc-title {
+      font-size: 22px;
+    }
+    
+    .email-input,
+    .search-button,
+    .cancel-button {
+      font-size: 15px;
+      padding: 10px;
+    }
+  }
