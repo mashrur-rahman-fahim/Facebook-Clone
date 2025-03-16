@@ -1,79 +1,119 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Home.css';
 import api from '../../api/axios';
-import {useNavigate} from 'react-router-dom'
-
+import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
-  const navigate=useNavigate();
-  const [signupData,setSignupData]= useState({
-    firstName:"",
-    lastName:"",
-    email:"",
-    password:"",
-    dateOfBirth:"",
-    gender:""
+  const navigate = useNavigate();
+  const [signupData, setSignupData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    dateOfBirth: "",
+    gender: ""
   });
- const [loginData,setLoginData]=useState({
-  email:"",
-  password:""
- })
-  const handleInputChange=(e)=>{
-    setSignupData({...signupData,[e.target.name]:e.target.value});
-  }
-  const handleLogin=async(e)=>{
-    e.preventDefault();
-    try {
-      const res=await api.post('/auth/login',loginData,{
-        withCredentials: true,
-      })
-      
-      alert(res.data.message);
-      const accessToken=res.data.accessToken;
-      localStorage.setItem('accessToken',accessToken);
-      navigate('/dashboard');
-     
-      
-    } catch (error) {
-      
-      alert(error.response.data.message);
-    }
-
-  }
-  const handleLoginChange=(e)=>{
-    setLoginData({...loginData,[e.target.name]:e.target.value});
-  }
-
-  const handleSubmit=async(e)=>{
   
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: ""
+  });
+
+  const [passwordValid, setPasswordValid] = useState(false);
+  const [errors, setErrors] = useState({
+    signup: {},
+    login: ""
+  });
+
+  useEffect(() => {
+    // Validate password length
+    setPasswordValid(signupData.password.length >= 8);
+  }, [signupData.password]);
+
+  const validateBirthdate = (dateString) => {
+    const birthDate = new Date(dateString);
+    const currentDate = new Date();
+    const minDate = new Date(
+      currentDate.getFullYear() - 16,
+      currentDate.getMonth(),
+      currentDate.getDate()
+    );
+    return birthDate <= minDate;
+  };
+
+  const handleInputChange = (e) => {
+    setSignupData({ ...signupData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, signup: {} });
+  };
+
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res= await api.post('/auth/register',signupData,{
-        withCredentials: true,
-      });
-      console.log(res);
-    
-        alert(res.data.message);
-        const accessToken=res.data.accessToken;
-        localStorage.setItem('accessToken',accessToken);
-        navigate('/dashboard');
-       
-     
+      const res = await api.post('/auth/login', loginData, { withCredentials: true });
+      localStorage.setItem('accessToken', res.data.accessToken);
+      navigate('/dashboard');
     } catch (error) {
-      alert(error.response.data.message);
-      console.error(error.response.data.message);
+      setErrors({ ...errors, login: error.response?.data?.message || "Invalid email or password" });
     }
-  }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newErrors = {};
+
+    // Basic validations
+    if (!signupData.firstName) newErrors.firstName = "First name is required";
+    if (!signupData.lastName) newErrors.lastName = "Last name is required";
+    if (!signupData.email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+    if (!passwordValid) newErrors.password = "Password must be at least 8 characters";
+    if (!signupData.dateOfBirth) {
+      newErrors.dateOfBirth = "Please select your birth date";
+    } else if (!validateBirthdate(signupData.dateOfBirth)) {
+      newErrors.dateOfBirth = "You must be at least 16 years old";
+    }
+    if (!signupData.gender) newErrors.gender = "Please select your gender";
+
+    if (Object.keys(newErrors).length > 0) {
+      return setErrors({ ...errors, signup: newErrors });
+    }
+
+    try {
+      const res = await api.post('/auth/register', signupData, { withCredentials: true });
+      localStorage.setItem('accessToken', res.data.accessToken);
+      navigate('/dashboard');
+    } catch (error) {
+      setErrors({ 
+        ...errors, 
+        signup: { general: error.response?.data?.message || "Registration failed. Please try again." } 
+      });
+    }
+  };
+
   return (
     <div className="landing-container">
       <div className="header">
         <div className="logo">facebook</div>
         <div className="login-form">
-          <form>
+          <form onSubmit={handleLogin}>
+            {errors.login && <div className="error-banner">{errors.login}</div>}
             <div className="form-row">
-              <input name="email" value={loginData.email} onChange={handleLoginChange} type="text" placeholder="Email" />
-              <input name="password" value={loginData.password} onChange={handleLoginChange} type="password" placeholder="Password" />
-              <button className="login-button" onClick={handleLogin}>Log In</button>
+              <input 
+                name="email" 
+                value={loginData.email} 
+                onChange={(e) => setLoginData({...loginData, email: e.target.value})} 
+                type="text" 
+                placeholder="Email" 
+              />
+              <input 
+                name="password" 
+                value={loginData.password} 
+                onChange={(e) => setLoginData({...loginData, password: e.target.value})} 
+                type="password" 
+                placeholder="Password" 
+              />
+              <button type="submit" className="login-button">Log In</button>
             </div>
             <div className="form-help">
               <a href="/login/identity">Forgot password?</a>
@@ -102,24 +142,95 @@ export const Home = () => {
         <div className="right-section">
           <h2>Sign Up</h2>
           <p>It's quick and easy.</p>
-          <form className="signup-form">
+          <form className="signup-form" onSubmit={handleSubmit}>
+            {errors.signup.general && <div className="error-banner">{errors.signup.general}</div>}
+            
             <div className="name-inputs">
-              <input name="firstName" value={signupData.firstName} onChange={handleInputChange}   type="text" placeholder="First name" />
-              <input name="lastName" value={signupData.lastName} onChange={handleInputChange}  type="text" placeholder="Last name" />
+              <div className="input-group">
+                <input 
+                  name="firstName" 
+                  value={signupData.firstName} 
+                  onChange={handleInputChange}   
+                  type="text" 
+                  placeholder="First name" 
+                  className={errors.signup.firstName ? 'error' : ''}
+                />
+                {errors.signup.firstName && <span className="error-message">{errors.signup.firstName}</span>}
+              </div>
+              <div className="input-group">
+                <input 
+                  name="lastName" 
+                  value={signupData.lastName} 
+                  onChange={handleInputChange}  
+                  type="text" 
+                  placeholder="Last name" 
+                  className={errors.signup.lastName ? 'error' : ''}
+                />
+                {errors.signup.lastName && <span className="error-message">{errors.signup.lastName}</span>}
+              </div>
             </div> 
-            <input name="email" value={signupData.email} onChange={handleInputChange} type="email" placeholder="Mobile number or email" />
-            <input name="password" value={signupData.password} onChange={handleInputChange} type="password" placeholder="New password" />
-            <div className="birthday-gender">
-              <label>Birthday</label>
-              <input name="dateOfBirth" value={signupData.dateOfBirth} onChange={handleInputChange} type="date" />
-              <label>Gender</label>
-              <select name="gender" value={signupData.gender} onChange={handleInputChange}>
-                <option>Female</option>
-                <option>Male</option>
-                <option>Custom</option>
-              </select>
+
+            <div className="input-group">
+              <input 
+                name="email" 
+                value={signupData.email} 
+                onChange={handleInputChange} 
+                type="email" 
+                placeholder="Mobile number or email" 
+                className={errors.signup.email ? 'error' : ''}
+              />
+              {errors.signup.email && <span className="error-message">{errors.signup.email}</span>}
             </div>
-            <button className="signup-button" onClick={handleSubmit}>Sign Up</button>
+
+            <div className="input-group">
+              <input 
+                name="password" 
+                value={signupData.password} 
+                onChange={handleInputChange} 
+                type="password" 
+                placeholder="New password" 
+                className={errors.signup.password ? 'error' : ''}
+              />
+              {errors.signup.password && <span className="error-message">{errors.signup.password}</span>}
+              <div className="password-requirements">
+                <p>Password must be at least 8 characters long</p>
+              </div>
+            </div>
+
+            <div className="birthday-gender">
+              <div className="input-group">
+                <label>Birthday</label>
+                <input 
+                  name="dateOfBirth" 
+                  value={signupData.dateOfBirth} 
+                  onChange={handleInputChange} 
+                  type="date" 
+                  className={errors.signup.dateOfBirth ? 'error' : ''}
+                  max={new Date().toISOString().split('T')[0]}
+                />
+                {errors.signup.dateOfBirth && (
+                  <span className="error-message">{errors.signup.dateOfBirth}</span>
+                )}
+              </div>
+              
+              <div className="input-group">
+                <label>Gender</label>
+                <select 
+                  name="gender" 
+                  value={signupData.gender} 
+                  onChange={handleInputChange}
+                  className={errors.signup.gender ? 'error' : ''}
+                >
+                  <option value="">Select gender</option>
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Custom">Custom</option>
+                </select>
+                {errors.signup.gender && <span className="error-message">{errors.signup.gender}</span>}
+              </div>
+            </div>
+
+            <button type="submit" className="signup-button">Sign Up</button>
             <p className="terms">By clicking Sign Up, you agree to our Terms, Data Policy and Cookies Policy.</p>
           </form>
         </div>
@@ -130,12 +241,9 @@ export const Home = () => {
           <a href="/">English (US)</a>
         </div>
         <div className="links">
-          <a href="/">About</a>
-          <a href="/">Developers</a>
-          <a href="/">Careers</a>
-          <a href="/">Privacy</a>
-          <a href="/">Terms</a>
-          <a href="/">Help</a>
+          {['About', 'Developers', 'Careers', 'Privacy', 'Terms', 'Help'].map((link) => (
+            <a key={link} href="/">{link}</a>
+          ))}
         </div>
       </div>
     </div>
