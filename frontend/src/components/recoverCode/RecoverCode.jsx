@@ -19,7 +19,8 @@ export const RecoverCode = () => {
       setError("");
       setIsSending(true);
       setSendSuccess(false);
-      await api.post("/auth/forgot-password", { email });
+     const res= await api.post("/auth/forgot-password", { email });
+     console.log(res.data);
       setSendSuccess(true);
       setIsResending(true);
       setIsResending(false);
