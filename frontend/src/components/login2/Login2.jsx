@@ -45,10 +45,11 @@ export const Login2 = () => {
         </a>
 
         <hr className="mb-6" />
-
-        <button className="w-full bg-[#42b72a] text-white px-5 py-3 text-lg rounded font-bold hover:bg-[#36a420]">
+        <div className="text-center">
+        <button className="w-70 bg-[#42b72a] text-white px-5 py-3 text-lg rounded font-bold hover:bg-[#36a420]">
           Create new account
         </button>
+      </div>
       </div>
 
       {/* Footer Section */}
