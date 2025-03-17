@@ -8,12 +8,14 @@ import { RecoverCodePage } from './pages/RecoverCodePage';
 import { ResetPassPage } from './pages/ResetPassPage';
 import { NavbarPage } from './pages/NavbarPage';
 import { FriendsPage } from './pages/FriendsPage';
+import { LogInPage2 } from './pages/LogInPage';
+
 
 const AppWrapper = () => {
   const location = useLocation();
 
   // Define routes where the navbar should NOT appear
-  const noNavbarRoutes = ['/login/identity', '/recover/code/:email', '/reset-password/:email/:code','/'];
+  const noNavbarRoutes = ['/login/identity', '/recover/code/:email', '/reset-password/:email/:code','/','/testlog1'];
 
   // Check if the current route is in the noNavbarRoutes array
   const shouldShowNavbar = !noNavbarRoutes.includes(location.pathname);
@@ -23,12 +25,14 @@ const AppWrapper = () => {
       {shouldShowNavbar && <NavbarPage />} {/* Conditionally render Navbar */}
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path='/testlog1' element={<LogInPage2 />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/test" element={<TestPage />} />
         <Route path="/login/identity" element={<FindAccPage />} />
         <Route path="/recover/code/:email" element={<RecoverCodePage />} />
         <Route path="/reset-password/:email/:code" element={<ResetPassPage />} />
         <Route path='/friends' element={<FriendsPage />} />
+        
       </Routes>
     </>
   );
