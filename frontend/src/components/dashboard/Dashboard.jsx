@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { authentication } from "../auth/auth"
-import { Logout } from "../logout/Logout"
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { authentication } from "../auth/auth";
+import { Logout } from "../logout/Logout";
 
 import {
   Home,
@@ -20,47 +20,51 @@ import {
   MessageCircle,
   Share2,
   MoreHorizontal,
-} from "lucide-react"
-import { Navbar } from "../navbar/navbar"
+} from "lucide-react";
+import { Navbar } from "../navbar/Navbar";
 
 export const Dashboard = () => {
-  const navigate = useNavigate()
-  const [user, setUser] = useState(null)
-  const [activeTab, setActiveTab] = useState("home")
-  const [postText, setPostText] = useState("")
-  const [isMobile, setIsMobile] = useState(false)
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [activeTab, setActiveTab] = useState("home");
+  const [postText, setPostText] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkIfMobile = () => setIsMobile(window.innerWidth < 768)
-    checkIfMobile()
-    window.addEventListener("resize", checkIfMobile)
-    return () => window.removeEventListener("resize", checkIfMobile)
-  }, [])
+    const checkIfMobile = () => setIsMobile(window.innerWidth < 768);
+    checkIfMobile();
+    window.addEventListener("resize", checkIfMobile);
+    return () => window.removeEventListener("resize", checkIfMobile);
+  }, []);
 
   useEffect(() => {
     const fetchUser = async () => {
-      const users = await authentication()
+      const users = await authentication();
       if (!users) {
-        navigate("/")
+        navigate("/");
       }
-      setUser(users)
-    }
-    fetchUser()
-  }, [navigate])
+      setUser(users);
+    };
+    fetchUser();
+  }, [navigate]);
 
   const handleLogout = async () => {
-    setUser(null)
-    await Logout()
-    navigate("/")
-  }
+    setUser(null);
+    await Logout();
+    navigate("/");
+  };
 
   // Sample posts data
   const posts = [
     {
       id: 1,
-      user: { name: "Jane Smith", avatar: "/placeholder.svg?height=40&width=40" },
+      user: {
+        name: "Jane Smith",
+        avatar: "/placeholder.svg?height=40&width=40",
+      },
       time: "3 hours ago",
-      content: "Just finished a great book! Anyone have recommendations for what to read next?",
+      content:
+        "Just finished a great book! Anyone have recommendations for what to read next?",
       likes: 24,
       comments: 5,
       shares: 2,
@@ -77,27 +81,62 @@ export const Dashboard = () => {
     },
     {
       id: 3,
-      user: { name: "Sarah Johnson", avatar: "/placeholder.svg?height=40&width=40" },
+      user: {
+        name: "Sarah Johnson",
+        avatar: "/placeholder.svg?height=40&width=40",
+      },
       time: "Yesterday",
-      content: "Just launched my new website! Check it out and let me know what you think.",
+      content:
+        "Just launched my new website! Check it out and let me know what you think.",
       likes: 102,
       comments: 15,
       shares: 7,
     },
-  ]
+  ];
 
   // Sample contacts
   const contacts = [
-    { id: 1, name: "Alex Johnson", avatar: "/placeholder.svg?height=36&width=36", online: true },
-    { id: 2, name: "Maria Garcia", avatar: "/placeholder.svg?height=36&width=36", online: true },
-    { id: 3, name: "David Kim", avatar: "/placeholder.svg?height=36&width=36", online: false },
-    { id: 4, name: "Lisa Wong", avatar: "/placeholder.svg?height=36&width=36", online: true },
-    { id: 5, name: "Robert Chen", avatar: "/placeholder.svg?height=36&width=36", online: false },
-  ]
+    {
+      id: 1,
+      name: "Alex Johnson",
+      avatar: "/placeholder.svg?height=36&width=36",
+      online: true,
+    },
+    {
+      id: 2,
+      name: "Maria Garcia",
+      avatar: "/placeholder.svg?height=36&width=36",
+      online: true,
+    },
+    {
+      id: 3,
+      name: "David Kim",
+      avatar: "/placeholder.svg?height=36&width=36",
+      online: false,
+    },
+    {
+      id: 4,
+      name: "Lisa Wong",
+      avatar: "/placeholder.svg?height=36&width=36",
+      online: true,
+    },
+    {
+      id: 5,
+      name: "Robert Chen",
+      avatar: "/placeholder.svg?height=36&width=36",
+      online: false,
+    },
+  ];
 
   // Facebook Logo
   const FacebookLogo = ({ className = "" }) => (
-    <svg viewBox="0 0 36 36" fill="url(#jsc_s_b)" height="40" width="40" className={className}>
+    <svg
+      viewBox="0 0 36 36"
+      fill="url(#jsc_s_b)"
+      height="40"
+      width="40"
+      className={className}
+    >
       <defs>
         <linearGradient x1="50%" x2="50%" y1="97.0782%" y2="0%" id="jsc_s_b">
           <stop offset="0%" stopColor="#0062E0"></stop>
@@ -110,7 +149,7 @@ export const Dashboard = () => {
         d="M25 23l.8-5H21v-3.5c0-1.4.5-2.5 2.7-2.5H26V7.4c-1.3-.2-2.7-.4-4-.4-4.1 0-7 2.5-7 7v4h-4.5v5H15v12.7c1 .2 2 .3 3 .3s2-.1 3-.3V23h4z"
       ></path>
     </svg>
-  )
+  );
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -165,20 +204,24 @@ export const Dashboard = () => {
 
                 <div className="mt-4 pt-4 border-t border-gray-200">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-gray-500 font-medium">Your shortcuts</h3>
+                    <h3 className="text-gray-500 font-medium">
+                      Your shortcuts
+                    </h3>
                     <button className="text-blue-500 text-sm">Edit</button>
                   </div>
 
                   <div className="space-y-1">
-                    {["Gaming Group", "Tech News", "Web Development"].map((group, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 cursor-pointer"
-                      >
-                        <div className="h-8 w-8 bg-gray-300 rounded-lg"></div>
-                        <span>{group}</span>
-                      </div>
-                    ))}
+                    {["Gaming Group", "Tech News", "Web Development"].map(
+                      (group, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 cursor-pointer"
+                        >
+                          <div className="h-8 w-8 bg-gray-300 rounded-lg"></div>
+                          <span>{group}</span>
+                        </div>
+                      )
+                    )}
                   </div>
                 </div>
 
@@ -207,7 +250,9 @@ export const Dashboard = () => {
                 <div className="flex-1 relative">
                   <input
                     type="text"
-                    placeholder={`What's on your mind, ${user?.firstName || "User"}?`}
+                    placeholder={`What's on your mind, ${
+                      user?.firstName || "User"
+                    }?`}
                     className="bg-gray-100 rounded-full px-4 py-2.5 w-full outline-none"
                     value={postText}
                     onChange={(e) => setPostText(e.target.value)}
@@ -218,11 +263,15 @@ export const Dashboard = () => {
               <div className="border-t border-gray-200 pt-3 flex justify-between">
                 <button className="flex items-center justify-center space-x-1 md:space-x-2 p-2 rounded-lg hover:bg-gray-100 flex-1">
                   <Image size={20} className="text-red-500" />
-                  <span className="text-gray-600 font-medium text-xs md:text-sm">Photo/Video</span>
+                  <span className="text-gray-600 font-medium text-xs md:text-sm">
+                    Photo/Video
+                  </span>
                 </button>
                 <button className="flex items-center justify-center space-x-1 md:space-x-2 p-2 rounded-lg hover:bg-gray-100 flex-1">
                   <Smile size={20} className="text-yellow-500" />
-                  <span className="text-gray-600 font-medium text-xs md:text-sm">Feeling/Activity</span>
+                  <span className="text-gray-600 font-medium text-xs md:text-sm">
+                    Feeling/Activity
+                  </span>
                 </button>
               </div>
             </div>
@@ -256,7 +305,11 @@ export const Dashboard = () => {
                     <p className="mb-3">{post.content}</p>
                     {post.image && (
                       <div className="rounded-lg overflow-hidden -mx-4">
-                        <img src={post.image || "/placeholder.svg"} alt="Post" className="w-full h-auto" />
+                        <img
+                          src={post.image || "/placeholder.svg"}
+                          alt="Post"
+                          className="w-full h-auto"
+                        />
                       </div>
                     )}
                   </div>
@@ -280,15 +333,21 @@ export const Dashboard = () => {
                 <div className="px-4 py-1 flex justify-between">
                   <button className="flex items-center justify-center space-x-1 md:space-x-2 p-2 rounded-lg hover:bg-gray-100 flex-1">
                     <ThumbsUp size={20} className="text-gray-500" />
-                    <span className="text-gray-600 font-medium text-xs md:text-sm">Like</span>
+                    <span className="text-gray-600 font-medium text-xs md:text-sm">
+                      Like
+                    </span>
                   </button>
                   <button className="flex items-center justify-center space-x-1 md:space-x-2 p-2 rounded-lg hover:bg-gray-100 flex-1">
                     <MessageCircle size={20} className="text-gray-500" />
-                    <span className="text-gray-600 font-medium text-xs md:text-sm">Comment</span>
+                    <span className="text-gray-600 font-medium text-xs md:text-sm">
+                      Comment
+                    </span>
                   </button>
                   <button className="flex items-center justify-center space-x-1 md:space-x-2 p-2 rounded-lg hover:bg-gray-100 flex-1">
                     <Share2 size={20} className="text-gray-500" />
-                    <span className="text-gray-600 font-medium text-xs md:text-sm">Share</span>
+                    <span className="text-gray-600 font-medium text-xs md:text-sm">
+                      Share
+                    </span>
                   </button>
                 </div>
               </div>
@@ -335,7 +394,9 @@ export const Dashboard = () => {
                 </div>
 
                 <div className="mt-4 pt-4 border-t border-gray-200">
-                  <h3 className="text-gray-500 font-medium mb-2">Group conversations</h3>
+                  <h3 className="text-gray-500 font-medium mb-2">
+                    Group conversations
+                  </h3>
                   <div className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 cursor-pointer">
                     <div className="h-9 w-9 bg-gray-200 rounded-full flex items-center justify-center">
                       <Users size={16} />
@@ -349,6 +410,5 @@ export const Dashboard = () => {
         </div>
       </div>
     </div>
-  )
-}
-
+  );
+};
