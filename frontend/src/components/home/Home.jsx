@@ -3,7 +3,7 @@ import './Home.css';
 import api from '../../api/axios';
 import { useNavigate } from 'react-router-dom';
 
-export const Home = () => {
+export const Home = () => {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
   const navigate = useNavigate();
   const [signupData, setSignupData] = useState({
     firstName: "",
