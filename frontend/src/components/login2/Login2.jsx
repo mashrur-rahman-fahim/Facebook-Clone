@@ -5,24 +5,22 @@ import "./Login2.css";
 
 export const Login2 = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+    <div className="min-h-screen bg-gray-100 flex flex-col lg:flex-row items-center justify-center lg:justify-between p-8">
       {/* Left Section */}
-      <div className="w-full md:w-1/2 text-center md:text-center mb-8">
-        <h1 className="text-blue-600 text-4xl font-bold">facebook</h1>
+      <div className="lg:w-1/2 lg:pl-20 text-center lg:text-left">
+        <h1 className="text-blue-600 text-6xl font-bold lg:mb-6">facebook</h1>
         <p
-          className="text-xl mt-4 font-bold"
+          className="text-xl lg:text-2xl font-normal lg:leading-7"
           style={{
             fontFamily: "SFProDisplay-Regular, Helvetica, Arial, sans-serif",
-            fontSize: "24px",
-            lineHeight: "28px",
-            width: "auto",
           }}
         >
           Facebook helps you connect and share with the people in your life.
         </p>
       </div>
-      {/* Right Section */}
-      <div className="w-full md:w-1/3 bg-white p-6 rounded-lg shadow-lg">
+
+      {/* Right Section (Login Box) */}
+      <div className="lg:w-1/3 w-full bg-white p-8 rounded-lg shadow-lg lg:mr-20">
         <input
           type="text"
           placeholder="Email address or phone number"
@@ -33,30 +31,27 @@ export const Login2 = () => {
           placeholder="Password"
           className="w-full p-3 mb-4 border border-gray-300 rounded"
         />
-        <button className="w-full bg-[#1877F2] text-white px-5 py-2.5 text-base rounded-md border-none cursor-pointer hover:bg-[#1a85e4] font-bold">
+        <button className="w-full bg-[#1877F2] text-white px-5 py-2.5 text-lg rounded-md border-none cursor-pointer hover:bg-[#166FE5] font-bold">
           Log in
         </button>
 
-        <div className="mb-4"></div>
-
         <a
           href="#"
-          className="text-blue-600 text-sm block text-center mb-4 hover:underline"
+          className="text-blue-600 text-sm block text-center my-4 hover:underline"
         >
           Forgotten password?
         </a>
 
-        <hr className="mb-4" />
+        <hr className="mb-6" />
 
-        <div className="mb-6"></div>
-
-        <button className="w-full bg-[#42b72a] text-white p-3 rounded font-bold hover:bg-[#36a420]">
+        <button className="w-full bg-[#42b72a] text-white px-5 py-3 text-lg rounded font-bold hover:bg-[#36a420]">
           Create new account
         </button>
       </div>
+
       {/* Footer Section */}
-      <div className="mt-4 w-full text-center">
-        <a href="#" className="text-sm text-black">
+      <div className="mt-6 lg:absolute footer text-center">
+        <a href="#" className="text-sm text-gray-600">
           <strong>Create a Page</strong> for a celebrity, brand or business.
         </a>
       </div>
