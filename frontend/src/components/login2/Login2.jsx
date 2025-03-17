@@ -19,8 +19,10 @@ export const Login2 = () => {
         </p>
       </div>
 
+      <div class="mt-6 mb-6"></div>
+
       {/* Right Section (Login Box) */}
-      <div className="lg:w-1/3 w-full bg-white p-8 rounded-lg shadow-lg lg:mr-20">
+      <div className="login-box bg-white p-8 rounded-lg shadow-lg">
         <input
           type="text"
           placeholder="Email address or phone number"
