@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authentication } from "../auth/auth";
@@ -21,13 +19,17 @@ import {
   Share2,
   MoreHorizontal,
 } from "lucide-react";
-import { Navbar } from "../navbar/Navbar";
+import api from "../../api/axios";
 
 export const Dashboard = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [activeTab, setActiveTab] = useState("home");
-  const [postText, setPostText] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  const [postContent, setPostContent] = useState({
+    body:"",
+    photos:[],
+    videos:[]
+  });
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -40,6 +42,7 @@ export const Dashboard = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const users = await authentication();
+    
       if (!users) {
         navigate("/");
       }
@@ -53,6 +56,19 @@ export const Dashboard = () => {
     await Logout();
     navigate("/");
   };
+  const createPost =async () => {
+    
+    try {
+      const res=await api.post("/api/create-post",postContent,{withCredentials: true});
+      console.log(res.data.post);
+      }
+      catch (error) {
+        
+      }
+      setPostContent({body:"",photos:[],videos:[]});
+      showPopup(false);
+  }
+
 
   // Sample posts data
   const posts = [
@@ -129,32 +145,10 @@ export const Dashboard = () => {
   ];
 
   // Facebook Logo
-  const FacebookLogo = ({ className = "" }) => (
-    <svg
-      viewBox="0 0 36 36"
-      fill="url(#jsc_s_b)"
-      height="40"
-      width="40"
-      className={className}
-    >
-      <defs>
-        <linearGradient x1="50%" x2="50%" y1="97.0782%" y2="0%" id="jsc_s_b">
-          <stop offset="0%" stopColor="#0062E0"></stop>
-          <stop offset="100%" stopColor="#19AFFF"></stop>
-        </linearGradient>
-      </defs>
-      <path d="M15 35.8C6.5 34.3 0 26.9 0 18 0 8.1 8.1 0 18 0s18 8.1 18 18c0 8.9-6.5 16.3-15 17.8l-1-.8h-4l-1 .8z"></path>
-      <path
-        fill="#FFFFFF"
-        d="M25 23l.8-5H21v-3.5c0-1.4.5-2.5 2.7-2.5H26V7.4c-1.3-.2-2.7-.4-4-.4-4.1 0-7 2.5-7 7v4h-4.5v5H15v12.7c1 .2 2 .3 3 .3s2-.1 3-.3V23h4z"
-      ></path>
-    </svg>
-  );
 
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Navbar */}
-      <Navbar />
 
       {/* Main Content */}
       <div className="pt-16 pb-4 px-4 md:px-8 max-w-screen-2xl mx-auto">
@@ -254,9 +248,12 @@ export const Dashboard = () => {
                       user?.firstName || "User"
                     }?`}
                     className="bg-gray-100 rounded-full px-4 py-2.5 w-full outline-none"
-                    value={postText}
-                    onChange={(e) => setPostText(e.target.value)}
+                    onClick={() => {
+                      setShowPopup(true);
+                    }}
+                    readOnly
                   />
+                  {/* popup overlay */}
                 </div>
               </div>
 
@@ -275,6 +272,7 @@ export const Dashboard = () => {
                 </button>
               </div>
             </div>
+            {/* popup */}
 
             {/* Posts */}
             {posts.map((post) => (
@@ -409,6 +407,59 @@ export const Dashboard = () => {
           )}
         </div>
       </div>
+      {showPopup && (
+       <div className="fixed inset-0 bg-gray-500/30 backdrop-blur-[2px] flex items-center justify-center p-4">
+       <div className="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden">
+         <div className="flex justify-between items-center p-4 border-b">
+           <h2 className="text-xl font-semibold text-gray-900">Create Post</h2>
+           <button 
+             onClick={() => setShowPopup(false)}
+             className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+           >
+             ✕
+           </button>
+         </div>
+     
+         <div className="p-4">
+           <div className="flex items-start gap-3 mb-4">
+             <div className="w-10 h-10 rounded-full bg-gray-200"></div>
+             <div className="flex-1">
+               <h3 className="font-semibold">{user.firstName} {user.lastName}</h3>
+              
+             </div>
+           </div>
+     
+          
+             <textarea
+              value={postContent.body}
+              onChange={(e) => setPostContent({ ...postContent, body: e.target.value })}
+               className="w-full p-2 text-xl border-none  placeholder-gray-400 focus:outline-none  rounded-none"
+               rows="4"
+               placeholder="What's on your mind?"
+             />
+     
+             <div className="p-2 border rounded-lg">
+               <div className="flex items-center justify-between text-gray-600">
+                 <span>Add to your post</span>
+                 <div className="flex gap-2">
+                   <button className="p-2 hover:bg-gray-100 rounded-full">📷</button>
+                   <button className="p-2 hover:bg-gray-100 rounded-full">🎥</button>
+                 </div>
+               </div>
+             </div>
+     
+             <button
+              onClick={createPost}
+               type="submit"
+               className="w-full bg-blue-500 text-white py-3 px-4 rounded-lg font-semibold text-lg hover:bg-blue-600 transition-colors disabled:bg-gray-300"
+             >
+               Post
+             </button>
+          
+         </div>
+       </div>
+     </div>
+      )}
     </div>
   );
 };

@@ -1,13 +1,24 @@
 import { useState, useEffect } from "react"
 import { Home, Users, Youtube, Bell, Menu, Search, X, Grid, MessageCircle } from 'lucide-react'
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation} from "react-router-dom"
 
 export const Navbar = () => {
     const navigate=useNavigate();
+    const location=useLocation();
   const [isMobile, setIsMobile] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
   const [showMobileMenu, setShowMobileMenu] = useState(false)
-  const [activeTab, setActiveTab] = useState("home")
+  const [activeTab, setActiveTab] = useState(() => {
+    const path = location.pathname;
+    if (path === "/friends") return "friends";
+    if (path === "/dashboard") return "home";
+    return "home"; // default
+  });
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === "/friends") setActiveTab("friends");
+    if (path === "/dashboard") setActiveTab("home");
+  }, [location.pathname]);
 
   useEffect(() => {
     const checkIfMobile = () => setIsMobile(window.innerWidth < 768)
@@ -27,12 +38,20 @@ export const Navbar = () => {
 
   // Updated Messenger Icon
   const MessengerIcon = ({ size = 24, className = "" }) => (
-    <svg width={size} height={size} viewBox="0 0 28 28" fill="none" className={className}>
+    <svg 
+      width={size}
+      height={size}
+      viewBox="0 0 28 28"
+      fill="currentColor"
+      className={className}
+    >
       <path
-        d="M14 2.333C20.436 2.333 25.667 7.563 25.667 14c0 6.436-5.231 11.667-11.667 11.667S2.333 20.436 2.333 14c0-6.437 5.231-11.667 11.667-11.667z"
-        fill="currentColor"
+        d="M14 2.333c6.437 0 11.667 5.23 11.667 11.667 0 6.436-5.23 11.667-11.667 11.667S2.333 20.436 2.333 14c0-6.437 5.23-11.667 11.667-11.667z"
       />
-      <path d="M15.8 8.333l-3.4 6.8h2.6l-1.533 4.6 5.666-6.9h-3.066l2.2-4.5h-5.867z" fill="white" />
+      <path 
+        d="M15.8 8.333l-3.4 6.8h2.6l-1.533 4.6 5.666-6.9h-3.066l2.2-4.5h-5.867z" 
+        fill="#fff" 
+      />
     </svg>
   )
 
@@ -301,7 +320,7 @@ export const Navbar = () => {
   return (
     <>
       {isMobile ? <MobileNavbar /> : <DesktopNavbar />}
-      <div className={isMobile ? "h-8" : "h-2"}></div> {/* Fixed spacer for navbar */}
+      <div className={isMobile ? "h-16" : "h-5"}></div> {/* Fixed spacer for navbar */}
     </>
   )
 }
