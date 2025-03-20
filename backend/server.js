@@ -5,7 +5,7 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import cookieParser from "cookie-parser";
 import apiRoutes from "./routes/apiRoutes.js";
-
+import cloudinary from "cloudinary";
 dotenv.config();
 
 const app = express();
@@ -15,7 +15,8 @@ const port = process.env.PORT || 5000;
 // const clientURLs = process.env.FRONTEND_URL.split(",");
 const corsOptions = {
   origin: process.env.FRONTEND_URL,
-  credentials: true,
+  credentials: true
+ 
 };
 app.use(cors(corsOptions));
 
@@ -33,6 +34,12 @@ app.use(cors(corsOptions));
 
 // app.use(cors(corsOptions));
 
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+    
+})
 app.use(express.json());
 app.use(cookieParser());
 

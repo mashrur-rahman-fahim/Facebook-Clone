@@ -18,4 +18,5 @@ router.get("/refresh-token", renewAccessToken);
 router.post("/forgot-password",forgotPassowrd);
 router.post("/verify-code",verifyCode);
 router.post("/reset-password",resetPass);
+router.post("/verify-token",verifyToken);
 export default router;

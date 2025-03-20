@@ -3,49 +3,29 @@ import { Logout } from "../logout/Logout";
 
 export const authentication = async () => {
   try {
-    let token = localStorage.getItem("accessToken");
-
-    if (!token) {
-      try {
-        token = await renewAccessToken();
-
-        if (!token) {
-          await Logout();
-          console.log("hi");
-          return null;
-        }
-      } catch (error) {
-        console.log(error);
-
-        await Logout();
-        return null;
-      }
-    }
+    const token = localStorage.getItem("accessToken");
+   
+   
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     const user = await api.get("/api/user");
 
     return user.data.user;
   } catch (error) {
-    console.log(error);
     try {
-      const token = await renewAccessToken();
-      if (!token) {
-        await Logout();
-
-        return null;
-      }
+      const token=await renewAccessToken();
+      localStorage.setItem("accessToken", token);
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      const user = await api.get("/api/user");
+    const user = await api.get("/api/user");
 
-      return user.data.user;
+    return user.data.user;
     } catch (error) {
       console.log(error);
-      await Logout();
-
-      return null;
+      Logout();
+      
     }
+    
   }
 };
 const renewAccessToken = async () => {

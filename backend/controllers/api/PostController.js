@@ -2,30 +2,32 @@ import Post from "../../models/Post.js";
 import User from "../../models/User.js";
 
 export const createPost = async (req, res) => {
-    const { body, photos, videos } = req.body;
-    const email=req.email;
+    const { body, photos = [], videos = [] } = req.body;
+   
 
-    const user=await User.findOne({email});
-
-    if(!user){
-        return res.status(404).json({message:"User not found"});
+    const userEmail = req.email;
+    if (!userEmail) {
+        return res.status(401).json({ message: "Unauthorized" });
     }
 
-    const createdBy=user._id;
-
     try {
-        const newPost = new Post({
+        const user = await User.findOne({ email: userEmail }).select('_id');
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        const post = await Post.create({
             body,
-            createdBy,
+            createdBy: user._id,
             photos,
             videos
         });
 
-        await newPost.save();
-        return res.status(201).json({ message: "Post created successfully", post: newPost });
+        return res.status(201).json({ message: "Post created successfully", post });
+
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: "Server error", error });
+        console.error("Error creating post:", error);
+        return res.status(500).json({ message: "Server error", error: error.message });
     }
 };
 

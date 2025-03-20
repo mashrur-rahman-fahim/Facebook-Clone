@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const postSchema = new mongoose.Schema({
   body: {
     type: String,
-    required: true,
+   default:null
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
