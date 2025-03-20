@@ -3,9 +3,12 @@ import React from 'react';
 export const Register = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h1 className="text-3xl font-bold text-blue-600 mb-4 text-center">facebook</h1>
-        <h2 className="text-xl font-semibold text-center mb-2">Create a new account</h2>
+      {/* Facebook Logo */}
+      <h1 className="text-5xl font-semibold text-[#0866ff] mb-8">facebook</h1>
+      
+      {/* Registration Box */}
+      <div className="bg-white p-6 unded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-2xl font-semibold text-center mb-2">Create a new account</h2>
         <p className="text-center mb-6 text-gray-600">It's quick and easy.</p>
         <form>
           {/* Name fields */}
@@ -89,7 +92,7 @@ export const Register = () => {
           {/* Submit button */}
           <button
             type="submit"
-            className="w-full bg-green-500 text-white p-2 rounded font-semibold hover:bg-green-600"
+            className="w-full bg-[#00a400] text-white p-2 rounded font-semibold"
           >
             Sign Up
           </button>
@@ -102,3 +105,4 @@ export const Register = () => {
   );
 };
 
+export default Register;

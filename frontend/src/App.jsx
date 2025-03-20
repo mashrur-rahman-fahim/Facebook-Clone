@@ -9,13 +9,14 @@ import { ResetPassPage } from './pages/ResetPassPage';
 import { NavbarPage } from './pages/NavbarPage';
 import { FriendsPage } from './pages/FriendsPage';
 import { LogInPage2 } from './pages/LogInPage';
+import { RegisterPage } from './pages/RegisterPage';
 
 
 const AppWrapper = () => {
   const location = useLocation();
 
   // Define routes where the navbar should NOT appear
-  const noNavbarRoutes = ['/login/identity', '/recover/code/:email', '/reset-password/:email/:code','/','/testlog1'];
+  const noNavbarRoutes = ['/login/identity', '/recover/code/:email', '/reset-password/:email/:code','/','/testlog1', '/testreg1'];
 
   // Check if the current route is in the noNavbarRoutes array
   const shouldShowNavbar = !noNavbarRoutes.includes(location.pathname);
@@ -26,6 +27,7 @@ const AppWrapper = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path='/testlog1' element={<LogInPage2 />} />
+        <Route path='/testreg1' element={<RegisterPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/test" element={<TestPage />} />
         <Route path="/login/identity" element={<FindAccPage />} />
