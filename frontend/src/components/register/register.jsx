@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import "./register.css";
 
 export const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -119,7 +120,7 @@ export const Register = () => {
                     }))
                   }
                 >
-                  <div className="bg-red-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  <div className="bg-red-700 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
                     !
                   </div>
                 </div>
@@ -131,41 +132,112 @@ export const Register = () => {
               )}
             </div>
           </div>
-
           {/* Date of birth */}
           <div className="mb-4">
-            <label className="block mb-1 text-gray-600">Date of birth</label>
-            <div className="flex space-x-2">
-              <select className="w-1/3 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option>Day</option>
-                {/* Add more options here */}
+            <label htmlFor="dob" className="block mb-1 text-gray-600">
+              Date of Birth
+            </label>
+            <div id="dob" className="flex space-x-2">
+              {/* Day */}
+              <select
+                aria-label="Day"
+                className="flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                style={{
+                  transformOrigin: "top",
+                  transform: "translateY(0)",
+                  position: "relative",
+                }}
+              >
+                
+                {Array.from({ length: 31 }, (_, i) => (
+                  <option key={i + 1} value={i + 1}>
+                    {i + 1}
+                  </option>
+                ))}
               </select>
-              <select className="w-1/3 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option>Month</option>
-                {/* Add more options here */}
+
+              {/* Month */}
+              <select
+                aria-label="Month"
+                className="flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                style={{
+                  transformOrigin: "top",
+                  transform: "translateY(0)",
+                  position: "relative",
+                }}
+              >
+                
+                {[
+                  "January",
+                  "February",
+                  "March",
+                  "April",
+                  "May",
+                  "June",
+                  "July",
+                  "August",
+                  "September",
+                  "October",
+                  "November",
+                  "December",
+                ].map((month, index) => (
+                  <option key={index} value={month}>
+                    {month}
+                  </option>
+                ))}
               </select>
-              <select className="w-1/3 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option>Year</option>
-                {/* Add more options here */}
+
+              {/* Year */}
+              <select
+                aria-label="Year"
+                className="flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                style={{
+                  transformOrigin: "top",
+                  transform: "translateY(0)",
+                  position: "relative",
+                }}
+              >
+                
+                {Array.from({ length: 121 }, (_, i) => {
+                  const year = new Date().getFullYear() - i;
+                  return (
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
+                  );
+                })}
               </select>
             </div>
           </div>
 
+
           {/* Gender options */}
           <div className="mb-4">
             <label className="block mb-1 text-gray-600">Gender</label>
-            <div className="flex space-x-4">
-              <label className="flex items-center">
-                <input type="radio" name="gender" className="mr-2" />
-                Female
+            <div className="flex space-x-3">
+              <label className="flex items-center justify-between p-3 border rounded-lg w-full cursor-pointer hover:bg-gray-100">
+                <span>Female</span>
+                <input
+                  type="radio"
+                  name="gender"
+                  className="form-radio accent-gray-500"
+                />
               </label>
-              <label className="flex items-center">
-                <input type="radio" name="gender" className="mr-2" />
-                Male
+              <label className="flex items-center justify-between p-3 border rounded-lg w-full cursor-pointer hover:bg-gray-100">
+                <span>Male</span>
+                <input
+                  type="radio"
+                  name="gender"
+                  className="form-radio accent-gray-500"
+                />
               </label>
-              <label className="flex items-center">
-                <input type="radio" name="gender" className="mr-2" />
-                Custom
+              <label className="flex items-center justify-between p-3 border rounded-lg w-full cursor-pointer hover:bg-gray-100">
+                <span>Custom</span>
+                <input
+                  type="radio"
+                  name="gender"
+                  className="form-radio accent-gray-500"
+                />
               </label>
             </div>
           </div>
@@ -209,7 +281,7 @@ export const Register = () => {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="w-1/3 bg-[#00a400] text-white p-2 rounded font-semibold"
+              className="w-3/6 bg-[#00a400] text-white p-1.5 rounded-lg font-bold leading-relaxed text-[1.1rem]"
             >
               Sign Up
             </button>
