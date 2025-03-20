@@ -1,51 +1,51 @@
 import multer from "multer";
+import { v2 as cloudinary } from "cloudinary";
 
-import { v2 as cloudinaryV2 } from "cloudinary"; // Use the correct import
-import fs from "fs"; // To remove local files after upload
+// Configure Cloudinary (should be at the top level)
 
-
-
-const upload = multer({ dest: "uploads/" });
+// Use memory storage for serverless environments
+const upload = multer({ storage: multer.memoryStorage() }).array("images", 10);
 
 export const uploadImage = async (req, res) => {
   try {
-    const uploadFiles = upload.array("images", 10);
-
-    uploadFiles(req, res, async function (err) {
-      if (err instanceof multer.MulterError) {
-        return res.status(500).json(err);
-      } else if (err) {
-        return res.status(500).json(err);
-      }
-
-      const files = req.files;
-      if (!files || files.length === 0) {
-        return res.status(400).json({ message: "No files uploaded" });
-      }
-
-      try {
-        const folder = "facebook_media";
-
-        // Use Promise.all to wait for all uploads to finish
-        const uploadedFiles = await Promise.all(
-          files.map(async (file) => {
-            const result = await cloudinaryV2.uploader.upload(file.path, {
-              folder,
-            });
-
-            // Remove the file from local storage after upload
-            fs.unlinkSync(file.path);
-
-            return result.secure_url;
-          })
-        );
-
-        return res.status(200).json({ images: uploadedFiles });
-      } catch (uploadError) {
-        return res.status(500).json({ message: "Cloudinary upload failed", error: uploadError });
-      }
+    // Process file upload
+    await new Promise((resolve, reject) => {
+      upload(req, res, (err) => {
+        if (err) reject(err);
+        else resolve();
+      });
     });
+
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ message: "No files uploaded" });
+    }
+
+    // Upload to Cloudinary
+    const uploadedUrls = await Promise.all(
+      req.files.map(async (file) => {
+        try {
+          const result = await cloudinary.uploader.upload(
+            `data:${file.mimetype};base64,${file.buffer.toString("base64")}`,
+            {
+              folder: "facebook_media",
+              resource_type: "auto",
+            }
+          );
+          return result.secure_url;
+        } catch (uploadError) {
+          console.error("Cloudinary upload error:", uploadError);
+          throw new Error("Failed to upload file to Cloudinary");
+        }
+      })
+    );
+
+    return res.status(200).json({ images: uploadedUrls });
+
   } catch (error) {
-    return res.status(500).json({ message: "Server error", error });
+    console.error("Server error:", error);
+    return res.status(500).json({
+      message: error.message,
+      code: error.code || "SERVER_ERROR",
+    });
   }
 };
