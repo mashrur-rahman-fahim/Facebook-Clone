@@ -70,7 +70,7 @@ export const Register = () => {
                 className={`w-full p-2 border rounded focus:outline-none focus:ring-2 ${
                   isFirstNameError
                     ? "border-red-500 focus:ring-red-500 pr-10"
-                    : "border-gray-300 focus:ring-blue-500"
+                    : "border-gray-300 focus:ring-black"
                 }`}
               />
               {isFirstNameError && (
@@ -83,13 +83,13 @@ export const Register = () => {
                     }))
                   }
                 >
-                  <div className="bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  <div className="bg-red-700 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
                     !
                   </div>
                 </div>
               )}
               {showTooltip.firstName && isFirstNameError && (
-                <div className="absolute top-12 left-0 bg-red-500 text-white text-sm px-2 py-1 rounded shadow-lg">
+                <div className="absolute top-12 left-0 bg-red-800 text-white text-sm px-2 py-1 rounded shadow-lg">
                   What's your name?
                 </div>
               )}
@@ -106,7 +106,7 @@ export const Register = () => {
                 className={`w-full p-2 border rounded focus:outline-none focus:ring-2 ${
                   isSurnameError
                     ? "border-red-500 focus:ring-red-500 pr-10"
-                    : "border-gray-300 focus:ring-blue-500"
+                    : "border-gray-300 focus:ring-black"
                 }`}
               />
               {isSurnameError && (
@@ -119,14 +119,14 @@ export const Register = () => {
                     }))
                   }
                 >
-                  <div className="bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  <div className="bg-red-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                     !
                   </div>
                 </div>
               )}
               {showTooltip.surname && isSurnameError && (
-                <div className="absolute top-12 left-0 bg-red-500 text-white text-sm px-2 py-1 rounded shadow-lg">
-                  What's your surname?
+                <div className="absolute top-12 left-0 bg-red-800 text-white text-sm px-2 py-1 rounded shadow-lg">
+                  What's your name?
                 </div>
               )}
             </div>
